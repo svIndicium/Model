@@ -1,12 +1,15 @@
+buildscript {
+    apply from: "dependencies.gradle"
+}
 plugins {
     id "java"
-    id 'java-library'
-    id 'maven-publish'
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id "java-library"
+    id "maven-publish"
+    id "org.jetbrains.kotlin.jvm" version "$kotlinVersion"
 }
 
-group = 'hu.indicium.dev'
-version = "${modelVersion}"
+group = "hu.indicium.dev"
+version = "0.0.3"
 
 repositories {
     mavenLocal()
@@ -14,7 +17,7 @@ repositories {
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = '11'
+    kotlinOptions.jvmTarget = "11"
 }
 
 task sourcesJar(type: Jar) {
@@ -34,7 +37,7 @@ publishing {
             name = "GitHubPackages"
             url = "https://maven.pkg.github.com/svIndicium/$project.name"
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
+                username = System.getenv("GITHUB_USERNAME")
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
